@@ -38,11 +38,30 @@ async def create_user(
 @router.get("/users")
 def get_users(
     db: Session = Depends(get_db),
-    request = Depends(Security.get_current_user)
+    token = Depends(Security.get_current_user)
 )-> str :
     users = db.query(UserModel).all()
     return scheme.GeneralResponse(
         msg="ok",
         status= status.HTTP_202_ACCEPTED,
         data= users
+    )
+
+
+@router.get("/users/{id}")
+def get_user_by_id(
+    id:int,
+    db : Session = Depends(get_db),
+    token = Depends(Security.get_current_user)
+)-> str:
+    user = db.query(UserModel).filter(UserModel.id ==id).first()
+    to_response = {
+        "user":user.username,
+        "email":user.email,
+        "id":user.id
+    }
+    return scheme.GeneralResponse(
+        status= status.HTTP_202_ACCEPTED,
+        msg="ok",
+        data=to_response
     )
