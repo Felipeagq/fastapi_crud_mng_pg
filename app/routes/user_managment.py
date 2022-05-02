@@ -1,4 +1,5 @@
 import email
+from multiprocessing.sharedctypes import synchronized
 from fastapi import APIRouter, Depends, status, HTTPException
 
 from app.database.postgres.database import get_db
@@ -71,4 +72,31 @@ def get_user_by_id(
         status= status.HTTP_202_ACCEPTED,
         msg="ok",
         data=to_response
+    )
+
+
+@router.delete("/user/{id}")
+def delete_user(
+    id:str,
+    db:Session = Depends(get_db),
+    token = Depends(Security.get_current_user)
+)-> str:
+    user =  db.query(UserModel).filter(UserModel.id==id)
+    user_geted = user.first()
+    print(user_geted)
+    if not user_geted:
+        return scheme.GeneralResponse(
+            msg="bad",
+            status= status.HTTP_404_NOT_FOUND,
+            data= HTTPException(
+                status_code= status.HTTP_404_NOT_FOUND,
+                detail="User not found"
+            )
+        )
+    user.delete()
+    db.commit()
+    return scheme.GeneralResponse(
+        status= status.HTTP_202_ACCEPTED,
+        msg="Deleted",
+        data=id
     )

@@ -6,7 +6,7 @@ import uvicorn
 from app.settings import settings
 from starlette.middleware.cors import CORSMiddleware
 
-from app.routes import user_managment, login_managment 
+from app.routes import user_managment, login_managment, blog_managment
 
 app = FastAPI(
     title= settings.PROJECT_NAME,
@@ -24,6 +24,8 @@ def hello_check():
 
 app.include_router(user_managment.router, prefix=f"{settings.API_V1_STR}/user")
 app.include_router(login_managment.router, prefix=f"{settings.API_V1_STR}/login")
+app.include_router(blog_managment.router, prefix=f"{settings.API_V1_STR}/blog")
+
 
 
 app.add_middleware(

@@ -23,3 +23,9 @@ class UserRequestScheme(BaseModel):
     username: str
     password: str
     email: str
+
+
+class BlogRequestScheme(BaseModel):
+    title: str
+    description: str
+    date: str
