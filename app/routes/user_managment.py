@@ -41,10 +41,17 @@ def get_users(
     token = Depends(Security.get_current_user)
 )-> str :
     users = db.query(UserModel).all()
+    users_list = []
+    for user in users:
+        users_list.append({
+            "id":user.id,
+            "email":user.email,
+            "username":user.username
+        })
     return scheme.GeneralResponse(
         msg="ok",
         status= status.HTTP_202_ACCEPTED,
-        data= users
+        data= users_list
     )
 
 
