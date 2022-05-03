@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
 
     SQLALCHEMY_DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5433"
+    MONGO_DATABASE_URL: str = "mongodb://root:example@localhost:27018/"
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60*3
     ALGORITHM: str = "HS256"
