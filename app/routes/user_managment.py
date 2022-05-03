@@ -39,7 +39,7 @@ async def create_user(
 @router.get("/users")
 def get_users(
     db: Session = Depends(get_db),
-    token = Depends(Security.get_current_user)
+    # token = Depends(Security.get_current_user)
 )-> str :
     users = db.query(UserModel).all()
     users_list = []

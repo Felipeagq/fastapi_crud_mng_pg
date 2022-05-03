@@ -27,5 +27,6 @@ class UserRequestScheme(BaseModel):
 
 class BlogRequestScheme(BaseModel):
     title: str
-    description: str
-    date: str
+    body: str
+
+
