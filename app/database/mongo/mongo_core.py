@@ -1,4 +1,4 @@
-import motor
+import motor.motor_asyncio
 
 from app.settings import settings
 
