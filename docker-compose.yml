@@ -2,7 +2,7 @@ version: '3.8'
 services:
   db_postgres:
     image: postgres:12.9-alpine
-    restart: always
+    # restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -11,7 +11,7 @@ services:
   
   db_mongo:
     image: mongo
-    restart: always
+    # restart: always
     environment:
       MONGO_INITDB_DATABASE: books
       MONGO_INITDB_ROOT_USERNAME: root

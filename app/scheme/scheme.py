@@ -30,3 +30,9 @@ class BlogRequestScheme(BaseModel):
     body: str
 
 
+class BookRequestScheme(BaseModel):
+    title: str
+    description: str
+    date:str 
+    autor: str
+
